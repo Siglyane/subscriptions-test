@@ -23,12 +23,12 @@ public class SubscriptionService {
     @Autowired
     StatusService statusService;
 
-    public Subscription saveSubscription(Subscription subscription){
+    public Subscription saveSubscription(Subscription subscription, EventHistory eventHistory){
         Subscription newSubscription = new Subscription();
         newSubscription.setId(subscription.getId());
         newSubscription.setCreatedAt(LocalDateTime.now());
         newSubscription.setUpdatedAt(LocalDateTime.now());
-        Status status = statusService.createStatus();
+        Status status = statusService.createStatus(eventHistory);
         newSubscription.setStatusId(status);
         subscriptionRepository.save(newSubscription);
         return newSubscription;

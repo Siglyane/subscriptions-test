@@ -21,6 +21,9 @@ public class EventHistoryService {
     @Autowired
     SubscriptionService subscriptionService;
 
+    @Autowired
+    StatusService statusService;
+
 
 
     public EventHistory saveSubscription(EventHistory eventHistory) {
@@ -28,7 +31,7 @@ public class EventHistoryService {
         newEvent.setSubscriptionId(eventHistory.getSubscriptionId());
         newEvent.setType(eventHistory.getType());
         newEvent.setCreatedAt(LocalDateTime.now());
-        Subscription sub = subscriptionService.saveSubscription(newEvent.getSubscriptionId());
+        Subscription sub = subscriptionService.saveSubscription(newEvent.getSubscriptionId(), newEvent);
         newEvent.setSubscriptionId(sub);
         eventHistoryRepository.save(newEvent);
         return newEvent;
@@ -51,6 +54,14 @@ public class EventHistoryService {
     public void cancelSubscription(Optional<EventHistory> eventRequested) {
         EventHistory eventToCancel = eventRequested.get();
         subscriptionService.updateTimeStamp(eventToCancel.getSubscriptionId());
+        statusService.statusCanceled(eventToCancel.getSubscriptionId());
         eventToCancel.setType(SubscriptionType.SUBSCRIPTION_CANCELED);
+    }
+
+    public void restartSubscription(Optional<EventHistory> eventRequested) {
+        EventHistory eventToRestart = eventRequested.get();
+        statusService.statusRestarted(eventToRestart.getSubscriptionId());
+        subscriptionService.updateTimeStamp(eventToRestart.getSubscriptionId());
+        eventToRestart.setType(SubscriptionType.SUBSCRIPTION_RESTARTED);
     }
 }

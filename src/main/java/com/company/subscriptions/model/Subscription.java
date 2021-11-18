@@ -1,5 +1,7 @@
 package com.company.subscriptions.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ public class Subscription {
     private String id;
 
     @OneToOne
+    @JsonProperty("status")
     @JoinColumn(name = "status_id")
     private Status statusId;
 

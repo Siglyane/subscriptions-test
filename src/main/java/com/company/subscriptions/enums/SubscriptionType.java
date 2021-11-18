@@ -2,9 +2,9 @@ package com.company.subscriptions.enums;
 
 public enum SubscriptionType {
 
-    SUBSCRIPTION_PURCHASED("PURCHASED"),
-    SUBSCRIPTION_CANCELED("CANCELED"),
-    SUBSCRIPTION_RESTARTED("RESTARTED");
+    SUBSCRIPTION_PURCHASED("ATIVA"),
+    SUBSCRIPTION_CANCELED("CANCELADA"),
+    SUBSCRIPTION_RESTARTED("ATIVA");
 
     private String value;
 

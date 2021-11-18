@@ -4,14 +4,17 @@ package com.company.subscriptions.DTO;
 import com.company.subscriptions.enums.SubscriptionType;
 import com.company.subscriptions.model.EventHistory;
 import com.company.subscriptions.model.Subscription;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 
 public class EventHistoryDTO {
 
 
+    @JsonProperty("notification_type")
     private SubscriptionType type;
 
+    @JsonProperty("subscription")
     private Subscription subscriptionId;
 
 

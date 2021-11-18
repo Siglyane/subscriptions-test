@@ -1,6 +1,7 @@
 package com.company.subscriptions.model;
 
 import com.company.subscriptions.enums.SubscriptionType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +22,11 @@ public class EventHistory {
     private Integer id;
 
     @Column
+    @JsonProperty("notification_type")
     private SubscriptionType type;
 
     @ManyToOne
+    @JsonProperty("subscription")
     @JoinColumn(name = "subscription_id", unique = true)
     private Subscription subscriptionId;
 

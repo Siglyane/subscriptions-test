@@ -16,7 +16,6 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
     private String name;
 
     public Status() {
