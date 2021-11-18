@@ -6,8 +6,6 @@ import com.company.subscriptions.model.EventHistory;
 import com.company.subscriptions.model.Subscription;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.time.LocalDateTime;
-
 public class EventHistoryDTO {
 
 
@@ -31,10 +29,6 @@ public class EventHistoryDTO {
 
     public SubscriptionType getType() {
         return type;
-    }
-
-    public void setType(SubscriptionType type) {
-        this.type = type;
     }
 
     public Subscription getSubscriptionId() {

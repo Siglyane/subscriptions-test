@@ -47,9 +47,12 @@ public class EventHistoryService {
         return eventRequested;
     }
 
+    /*
+     *
     public void deleteSubscription(Optional<EventHistory> eventRequested) {
         eventHistoryRepository.delete(eventRequested.get());
     }
+     */
 
     public void cancelSubscription(Optional<EventHistory> eventRequested) {
         EventHistory eventToCancel = eventRequested.get();

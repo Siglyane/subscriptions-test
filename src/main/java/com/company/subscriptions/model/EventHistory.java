@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,7 @@ public class EventHistory {
     private Integer id;
 
     @Column
+    @Enumerated(EnumType.STRING)
     @JsonProperty("notification_type")
     private SubscriptionType type;
 
@@ -39,17 +42,8 @@ public class EventHistory {
     public EventHistory() {
     }
 
-
     public EventHistory(EventHistory eventHistory){
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public SubscriptionType getType() {
@@ -66,10 +60,6 @@ public class EventHistory {
 
     public void setSubscriptionId(Subscription subscriptionId) {
         this.subscriptionId = subscriptionId;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

@@ -4,14 +4,11 @@ package com.company.subscriptions.service;
 import com.company.subscriptions.model.EventHistory;
 import com.company.subscriptions.model.Status;
 import com.company.subscriptions.model.Subscription;
-import com.company.subscriptions.repository.StatusRepository;
 import com.company.subscriptions.repository.SubscriptionRepository;
-import com.fasterxml.jackson.annotation.OptBoolean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
