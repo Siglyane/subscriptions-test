@@ -1,5 +1,6 @@
 package com.company.subscriptions.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
@@ -24,9 +25,11 @@ public class Subscription {
     @JoinColumn(name = "status_id")
     private Status statusId;
 
+    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 

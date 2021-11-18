@@ -37,7 +37,8 @@ public class EventHistoryController {
     @PostMapping("")
     public ResponseEntity<EventHistory> newSubscription (@RequestBody EventHistoryDTO eventHistoryDTO) {
         try {
-            if (eventHistoryDTO.getType() == SubscriptionType.SUBSCRIPTION_PURCHASED) {
+            Optional<EventHistory> eventRequested = eventHistoryService.findById(eventHistoryDTO.getSubscriptionId());
+            if (eventHistoryDTO.getType() == SubscriptionType.SUBSCRIPTION_PURCHASED && eventRequested.isEmpty()) {
                 EventHistory eventHistory = new EventHistory();
                 BeanUtils.copyProperties(eventHistoryDTO, eventHistory);
                 eventHistory = eventHistoryService.saveSubscription(eventHistory);
@@ -62,8 +63,8 @@ public class EventHistoryController {
         eventHistoryService.deleteSubscription(eventRequested);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
-     */
+    *
+    */
 
     @PatchMapping("/cancel")
     public ResponseEntity<EventHistory> cancelSubscription (@RequestBody EventHistoryDTO eventHistoryDTO) {

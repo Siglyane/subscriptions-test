@@ -1,6 +1,7 @@
 package com.company.subscriptions.model;
 
 import com.company.subscriptions.enums.SubscriptionType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.Column;
@@ -30,6 +31,7 @@ public class EventHistory {
     @JoinColumn(name = "subscription_id", unique = true)
     private Subscription subscriptionId;
 
+    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
