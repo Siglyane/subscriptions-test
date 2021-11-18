@@ -1,5 +1,7 @@
 package com.company.subscriptions.model;
 
+import com.company.subscriptions.enums.SubscriptionType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
@@ -19,31 +20,38 @@ public class EventHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
-    private String type;
-
+    @Column
+    private SubscriptionType type;
 
     @ManyToOne
-    @JoinColumn(name = "subscription_id")
+    @JoinColumn(name = "subscription_id", unique = true)
     private Subscription subscriptionId;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    public EventHistory(String type, Subscription subscriptionId) {
-        this.type = type;
-        this.subscriptionId = subscriptionId;
+
+    public EventHistory() {
+    }
+
+
+    public EventHistory(EventHistory eventHistory){
+
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getType() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public SubscriptionType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(SubscriptionType type) {
         this.type = type;
     }
 
@@ -59,4 +67,7 @@ public class EventHistory {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }

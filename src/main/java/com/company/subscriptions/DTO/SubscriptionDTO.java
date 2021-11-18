@@ -15,9 +15,6 @@ public class SubscriptionDTO {
 
     private Status statusId;
 
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
 
     public SubscriptionDTO(Subscription entity) {
         this.id = entity.getId();
@@ -39,16 +36,4 @@ public class SubscriptionDTO {
     }
 
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 }

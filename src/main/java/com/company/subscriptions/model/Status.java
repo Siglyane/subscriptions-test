@@ -16,11 +16,11 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+
     private String name;
 
-    public Status(String name) {
-        this.name = name;
+    public Status() {
+
     }
 
     public Integer getId() {

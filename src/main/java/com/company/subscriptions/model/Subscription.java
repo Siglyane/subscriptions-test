@@ -18,7 +18,7 @@ public class Subscription {
     private String id;
 
     @OneToOne
-    @JoinColumn(name = "status_id", nullable = false)
+    @JoinColumn(name = "status_id")
     private Status statusId;
 
     @Column(name = "created_at")
@@ -27,33 +27,39 @@ public class Subscription {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @OneToMany
-    @JoinColumn(name = "subscription_id")
-    private List<EventHistory> eventHistories;
 
-    public Subscription(String id, Status statusId) {
+    public Subscription() {
+
+    }
+
+    public Subscription(String id) {
         this.id = id;
-        this.statusId = statusId;
     }
 
-    public List<EventHistory> getEventHistories() {
-        return eventHistories;
-    }
 
     public String getId() {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Status getStatusId() {
         return statusId;
     }
 
+    public void setStatusId(Status statusId) {
+        this.statusId = statusId;
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
@@ -62,4 +68,5 @@ public class Subscription {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
 }

@@ -6,9 +6,6 @@ import com.company.subscriptions.model.Status;
 public class StatusDTO {
 
 
-    private Integer id;
-
-
     private String name;
 
     public StatusDTO(Status entity) {
@@ -17,10 +14,6 @@ public class StatusDTO {
 
     public StatusDTO(String name) {
         this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public String getName() {
