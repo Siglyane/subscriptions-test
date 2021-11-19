@@ -34,6 +34,8 @@ public class SubscriptionService {
 
     public void updateTimeStamp(Subscription subscription) {
         Optional<Subscription> subscriptionRequested = subscriptionRepository.findById(subscription.getId());
-        subscriptionRequested.get().setUpdatedAt(LocalDateTime.now());
+        Subscription subscriptionToUpdate = subscriptionRequested.get();
+        subscriptionToUpdate.setUpdatedAt(LocalDateTime.now());
+        subscriptionRepository.save(subscriptionToUpdate);
     }
 }

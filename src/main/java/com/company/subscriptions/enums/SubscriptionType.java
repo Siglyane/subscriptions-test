@@ -1,5 +1,9 @@
 package com.company.subscriptions.enums;
 
+import com.company.subscriptions.model.EventHistory;
+
+import java.util.Objects;
+
 public enum SubscriptionType {
 
     SUBSCRIPTION_PURCHASED("ATIVA"),
@@ -15,5 +19,8 @@ public enum SubscriptionType {
     public String getValue(){
         return value;
     }
+
+
+
 
 }

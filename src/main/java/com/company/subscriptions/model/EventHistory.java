@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "event_history")
@@ -43,7 +44,14 @@ public class EventHistory {
     }
 
     public EventHistory(EventHistory eventHistory){
+    }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public SubscriptionType getType() {
@@ -60,6 +68,10 @@ public class EventHistory {
 
     public void setSubscriptionId(Subscription subscriptionId) {
         this.subscriptionId = subscriptionId;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {

@@ -24,6 +24,7 @@ public class StatusService {
     public void statusCanceled(Subscription subscriptionId) {
         Status status = subscriptionId.getStatusId();
         status.setName(SubscriptionType.SUBSCRIPTION_CANCELED.getValue());
+        statusRepository.save(status);
     }
 
     public void statusRestarted(Subscription subscriptionId) {

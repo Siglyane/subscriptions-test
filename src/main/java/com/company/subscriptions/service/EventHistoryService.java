@@ -59,6 +59,7 @@ public class EventHistoryService {
         subscriptionService.updateTimeStamp(eventToCancel.getSubscriptionId());
         statusService.statusCanceled(eventToCancel.getSubscriptionId());
         eventToCancel.setType(SubscriptionType.SUBSCRIPTION_CANCELED);
+        eventHistoryRepository.save(eventToCancel);
     }
 
     public void restartSubscription(Optional<EventHistory> eventRequested) {
@@ -66,5 +67,6 @@ public class EventHistoryService {
         statusService.statusRestarted(eventToRestart.getSubscriptionId());
         subscriptionService.updateTimeStamp(eventToRestart.getSubscriptionId());
         eventToRestart.setType(SubscriptionType.SUBSCRIPTION_RESTARTED);
+        eventHistoryRepository.save(eventToRestart);
     }
 }

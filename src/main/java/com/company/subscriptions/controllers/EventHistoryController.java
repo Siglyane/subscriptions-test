@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -28,15 +29,22 @@ public class EventHistoryController {
 
 
 
+    // Retorna uma lista com todos os objetos salvos no banco de dados
     @GetMapping
     public ResponseEntity<List<EventHistory>> getAllEvents() {
         List<EventHistory> events = eventHistoryService.findAll();
         return new ResponseEntity<>(events, HttpStatus.OK);
     }
 
+    // Cria um novo objeto
     @PostMapping("")
     public ResponseEntity<EventHistory> newSubscription (@RequestBody EventHistoryDTO eventHistoryDTO) {
         try {
+            /* Verifica se já existe um objeto com essa Id no banco de dados
+             * Como este atributo possui a anotação unique = true, mesmo sem esse verificação
+             * ele já não possibilitava a criação de um novo objeto, porém o retorno do HTTP era 500
+             * fiz esta verificação para usar um retorno adequado.
+             */
             Optional<EventHistory> eventRequested = eventHistoryService.findById(eventHistoryDTO.getSubscriptionId());
             if (eventHistoryDTO.getType() == SubscriptionType.SUBSCRIPTION_PURCHASED && eventRequested.isEmpty()) {
                 EventHistory eventHistory = new EventHistory();
@@ -66,9 +74,19 @@ public class EventHistoryController {
     *
     */
 
+
+    /*
+     * Para a solicitação de alterar o status optei por usar o Patch, que determina a alteração de parte do objeto,
+     *  porém algumas empresas costumam usar o Put e criar um novo objeto mantendo as informações antigas e
+     *  usando as novas informações na hora de criar um novo objeto. Escolhi usar o Patch por ser
+     *  uma aplicação pequena e não afetar muito no tempo de resposta.
+     */
+
+    //Cancela a inscrição sem deletar do banco
     @PatchMapping("/cancel")
     public ResponseEntity<EventHistory> cancelSubscription (@RequestBody EventHistoryDTO eventHistoryDTO) {
         try{
+            //Verica se existe no banco e se o tipo solicitado está de acordo com o end point
             Optional<EventHistory> eventRequested = eventHistoryService.findById(eventHistoryDTO.getSubscriptionId());
             if (eventHistoryDTO.getType() == SubscriptionType.SUBSCRIPTION_CANCELED && eventRequested.isPresent())
             {
@@ -84,11 +102,16 @@ public class EventHistoryController {
     }
 
 
+    // Recompra
     @PatchMapping("/restart")
     public ResponseEntity<EventHistory> restartSubscription (@RequestBody EventHistoryDTO eventHistoryDTO) {
         try {
+            //Verica se existe no banco, se a assinatura foi cancelada e se o tipo solicitado está
+            // de acordo com o end point
            Optional<EventHistory> eventRequested = eventHistoryService.findById(eventHistoryDTO.getSubscriptionId());
-            if (eventHistoryDTO.getType() == SubscriptionType.SUBSCRIPTION_RESTARTED && eventRequested.isPresent()) {
+            if (eventHistoryDTO.getType() == SubscriptionType.SUBSCRIPTION_RESTARTED
+                    && eventRequested.isPresent()
+                    && eventRequested.get().getType().equals(SubscriptionType.SUBSCRIPTION_CANCELED)) {
                 EventHistory eventHistory = new EventHistory();
                 BeanUtils.copyProperties(eventHistoryDTO, eventHistory);
                 eventHistoryService.restartSubscription(eventRequested);
