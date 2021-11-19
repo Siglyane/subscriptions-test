@@ -20,6 +20,7 @@ public class Subscription {
     @Id
     private String id;
 
+    // Informa a relação do subscription com status
     @OneToOne
     @JsonProperty("status")
     @JoinColumn(name = "status_id")

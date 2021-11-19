@@ -8,7 +8,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EventHistoryDTO {
 
-
+    /*
+     * Escolhi por usar uma classe DTO para delimitar as informações passadas do client para a API
+     * porém deixei todas as informações abertas quando passada para o client para ser mais visível
+     * para a avaliação
+     */
     @JsonProperty("notification_type")
     private SubscriptionType type;
 

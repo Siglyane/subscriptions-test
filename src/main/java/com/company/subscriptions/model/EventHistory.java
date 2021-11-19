@@ -15,7 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
-import java.util.Objects;
+
 
 @Entity
 @Table(name = "event_history")
@@ -25,16 +25,20 @@ public class EventHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    // O Enumerated informa o nome do enum para o banco de dados
+    // JsonProperty é como a informação ira aparecer e ser buscada no json
     @Column
     @Enumerated(EnumType.STRING)
     @JsonProperty("notification_type")
     private SubscriptionType type;
 
+    // Informa relação de eventos com subs id
     @ManyToOne
     @JsonProperty("subscription")
     @JoinColumn(name = "subscription_id", unique = true)
     private Subscription subscriptionId;
 
+    // Formata a data no JSON, acho mais legível para o cliente e não afeta a formatação do banco de dados
     @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss")
     @Column(name = "created_at")
     private LocalDateTime createdAt;

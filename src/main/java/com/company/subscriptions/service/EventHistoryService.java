@@ -25,7 +25,7 @@ public class EventHistoryService {
     StatusService statusService;
 
 
-
+    // Cria e salva um evento, gerando também um assinatura e um status
     public EventHistory saveSubscription(EventHistory eventHistory) {
         EventHistory newEvent = new EventHistory(eventHistory);
         newEvent.setSubscriptionId(eventHistory.getSubscriptionId());
@@ -37,11 +37,13 @@ public class EventHistoryService {
         return newEvent;
     }
 
+    // Encontra todos os eventos
     public List<EventHistory> findAll() {
         List<EventHistory> events = new ArrayList<>(eventHistoryRepository.findAll());
         return events;
     }
 
+    // Procura pela id a assinatura
     public Optional<EventHistory> findById(Subscription subscriptionId) {
         Optional<EventHistory> eventRequested = eventHistoryRepository.findBySubscriptionId(subscriptionId);
         return eventRequested;
@@ -54,6 +56,7 @@ public class EventHistoryService {
     }
      */
 
+    // Faz o cancelamento: atualizando o status, hora que foi atualizada e tipo da assinatura
     public void cancelSubscription(Optional<EventHistory> eventRequested) {
         EventHistory eventToCancel = eventRequested.get();
         subscriptionService.updateTimeStamp(eventToCancel.getSubscriptionId());
@@ -62,6 +65,7 @@ public class EventHistoryService {
         eventHistoryRepository.save(eventToCancel);
     }
 
+    // Faz a recompra: atualizando o status, hora que foi atualizada e tipo da assinatura
     public void restartSubscription(Optional<EventHistory> eventRequested) {
         EventHistory eventToRestart = eventRequested.get();
         statusService.statusRestarted(eventToRestart.getSubscriptionId());

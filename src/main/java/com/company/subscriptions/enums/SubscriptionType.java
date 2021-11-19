@@ -6,6 +6,9 @@ import java.util.Objects;
 
 public enum SubscriptionType {
 
+    /*
+     * Usei uma enum por ser somente 3 possíveis inscrições
+     */
     SUBSCRIPTION_PURCHASED("ATIVA"),
     SUBSCRIPTION_CANCELED("CANCELADA"),
     SUBSCRIPTION_RESTARTED("ATIVA");

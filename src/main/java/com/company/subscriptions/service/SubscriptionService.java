@@ -20,6 +20,7 @@ public class SubscriptionService {
     @Autowired
     StatusService statusService;
 
+    // Salva uma assinatura
     public Subscription saveSubscription(Subscription subscription, EventHistory eventHistory){
         Subscription newSubscription = new Subscription();
         newSubscription.setId(subscription.getId());
@@ -32,6 +33,7 @@ public class SubscriptionService {
 
     }
 
+    // Atualiza a hora do update
     public void updateTimeStamp(Subscription subscription) {
         Optional<Subscription> subscriptionRequested = subscriptionRepository.findById(subscription.getId());
         Subscription subscriptionToUpdate = subscriptionRequested.get();
